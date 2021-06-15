@@ -1,5 +1,5 @@
 # default-TEM-model
-AxonDeepSeg default TEM model and testing image
+AxonDeepSeg default TEM model and testing image. This model is suited for a resolution of 0.01 micrometer per pixel and was trained on mouse brain data collected via a Transmission Electron Microscope (TEM).
 
 
 # Steps to train this model
