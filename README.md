@@ -3,8 +3,8 @@ AxonDeepSeg default TEM model and testing image. This model is suited for a reso
 
 
 # Steps to train this model
-1. Get ADS version: [[b05a40a]](https://github.com/neuropoly/axondeepseg/commit/b05a40aa03979a83313fe8704ee389672ed26ed7)
-2. Get the data: https://osf.io/uewd9/?action=download&version=4 (will soon be migrated to git-annex)
-3. Run the notebook "guide_dataset_building.ipynb" to perform a split into training and validation set. 
-4. Go to "training_guideline.ipynb" notebook and make necessary changes required in paths, URL’s and config. Finally run all the cells of the notebook.
-5. After successfully running all the cells, the trained model file will be saved under the directory: AxonDeepSeg/axondeepseg/models/
+1. Get `ivadomed` version: [[55fc2067]](https://github.com/ivadomed/ivadomed/commit/55fc2067cbb9c97a711e32cf8b5a377fb6d517be)
+2. Get the data: `data_axondeepseg_tem` (Dataset Annex version: c778a33323a6e6c9c5bf38bd1e8a7038686f3423)
+3. Copy the "model_seg_mouse_axon-myelin_tem.json" file and update the following fields: `path_output`, `path_data` and `gpu_ids`.
+4. Run ivadomed: `ivadomed -c path/to/the/config/file`
+5. The trained model file will be saved under the `path_output` directory.
