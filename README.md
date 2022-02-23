@@ -1,4 +1,3 @@
-https://github.com/axondeepseg/default-TEM-model/tree/main/model_seg_mouse_axon-myelin_tem
 # model_seg_mouse_axon-myelin_tem
 ---
 ## Model overview
@@ -7,29 +6,31 @@ https://github.com/axondeepseg/default-TEM-model/tree/main/model_seg_mouse_axon-
 AxonDeepSeg default TEM model and testing image. This model is suited for a resolution of 0.01 micrometer per pixel and was trained on mouse brain data collected via a Transmission Electron Microscope (TEM).
 
 ## Dependencies
-- [ivadomed](https://ivadomed.org/) commit: XXX
-- [axondeepseg](https://axondeepseg.readthedocs.io/en/latest/) commit: XXX
+- [ivadomed](https://ivadomed.org/) commit: e6554281d07b5afef9e68ce8b02e86b02bd68363
+- [axondeepseg](https://axondeepseg.readthedocs.io/en/latest/) commit: 805868e39eddf620c9f3d60d313cadffb1121bfb
 
 ## Segment (ADS)
 To segment an image using this model, use
 ```
-axondeepseg -t <MODALITY> -i <IMG_PATH> -m <path_to_model_folder> -s <PIXEL_SIZE>
+axondeepseg -t TEM -i <IMG_PATH> -m <path_to_model_folder> -s <PIXEL_SIZE>
 ```
+The `-m` option can be omitted in this case because this is a default built-in model.
+
 
 ## Train and test (ivadomed)
 
 ### Clone this repository
 In order to train this model, you will need the json configuration file located in this repo.
 ```
-git clone MODEL_REPO_URL
+git clone https://github.com/axondeepseg/default-TEM-model
 ```
 
 ### Get the data
-- git@data.neuro.polymtl.ca:datasets/dataset-used-to-train-the-model
-- commit XXX
+- git@data.neuro.polymtl.ca:datasets/data_axondeepseg_tem
+- commit c778a33323a6e6c9c5bf38bd1e8a7038686f3423
 
 ```
-git clone git@data.neuro.polymtl.ca:datasets/dataset-used-to-train-the-model
+git clone git@data.neuro.polymtl.ca:datasets/data_axondeepseg_tem
 cd dataset-used-to-train-the-model
 git annex get .
 ```
