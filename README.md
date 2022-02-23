@@ -1,7 +1,7 @@
 # model_seg_mouse_axon-myelin_tem
 ---
 ## Model overview
-(image of segmentation obtained from this model)
+![tem model preview image](tem_model_preview.png)
 
 AxonDeepSeg default TEM model and testing image. This model is suited for a resolution of 0.01 micrometer per pixel and was trained on mouse brain data collected via a Transmission Electron Microscope (TEM).
 
