@@ -12,7 +12,7 @@ AxonDeepSeg default TEM model and testing image. This model is suited for a reso
 ## Segment (ADS)
 To segment an image using this model, use
 ```
-axondeepseg -t TEM -i <IMG_PATH> -m <path_to_model_folder> -s <PIXEL_SIZE>
+axondeepseg -t TEM -i <IMG_PATH> -s <PIXEL_SIZE>
 ```
 The `-m` option can be omitted in this case because this is a default built-in model.
 
