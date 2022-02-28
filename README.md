@@ -31,7 +31,7 @@ git clone https://github.com/axondeepseg/default-TEM-model
 
 ```
 git clone git@data.neuro.polymtl.ca:datasets/data_axondeepseg_tem
-cd dataset-used-to-train-the-model
+cd data_axondeepseg_tem
 git annex get .
 ```
 
