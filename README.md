@@ -23,7 +23,7 @@ git clone https://github.com/axondeepseg/default-TEM-model
 ```
 
 ### Get the data
-The SEM dataset used to train this model is hosted on git-annex at `data.neuro.polymtl.ca:datasets/data_axondeepseg_tem`. The specific dataset revision hash used for training is documented in the *version_info.log* file.
+The TEM dataset used to train this model is hosted on git-annex at `data.neuro.polymtl.ca:datasets/data_axondeepseg_tem`. The specific dataset revision hash used for training is documented in the *version_info.log* file.
 
 ### Train this model
 To train the model, please first update the following fields in the aforementioned JSON configuration file:
