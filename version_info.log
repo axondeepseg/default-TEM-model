@@ -1,0 +1,36 @@
+IVADOMED TOOLBOX
+----------------
+(git-HEAD-55fc2067cbb9c97a711e32cf8b5a377fb6d517be*)
+
+
+DATASET VERSION
+---------------
+The following BIDS dataset(s) were used for training.
+1. ../data_extrassd_maboudb/20211011_optim_tem/data_axondeepseg_tem/ - Dataset Annex version: c778a33323a6e6c9c5bf38bd1e8a7038686f3423*
+
+
+SYSTEM INFO
+-------------
+OS: linux (Linux-5.4.0-88-generic-x86_64-with-glibc2.27)
+CPU cores: Available: 40
+
+
+
+
+CONFIG INPUTS
+-------------
+command: test
+gpu_ids: [5]
+path_output: ../data_extrassd_maboudb/20211011_optim_tem/20211016_log_tem_base512_full
+model_name: model_seg_rat_axon-myelin_tem
+debugging: True
+log_file: log
+object_detection_params: {'object_detection_path': None, 'safety_factor': [1.0, 1.0, 1.0]}
+loader_parameters: {'path_data': ['../data_extrassd_maboudb/20211011_optim_tem/data_axondeepseg_tem/'], 'subject_selection': {'n': [], 'metadata': [], 'value': []}, 'target_suffix': ['_seg-axon-manual', '_seg-myelin-manual'], 'extensions': ['.png'], 'roi_params': {'suffix': None, 'slice_filter_roi': None}, 'contrast_params': {'training_validation': ['TEM'], 'testing': ['TEM'], 'balance': {}}, 'slice_filter_params': {'filter_empty_mask': False, 'filter_empty_input': True}, 'slice_axis': 'axial', 'multichannel': False, 'soft_gt': False, 'is_input_dropout': False, 'bids_config': 'ivadomed/config/config_bids.json'}
+split_dataset: {'fname_split': None, 'random_seed': 6, 'split_method': 'participant_id', 'data_testing': {'data_type': 'participant_id', 'data_value': ['sub-nyuMouse26']}, 'balance': None, 'train_fraction': 0.7, 'test_fraction': 0.1}
+training_parameters: {'batch_size': 4, 'loss': {'name': 'DiceLoss'}, 'training_time': {'num_epochs': 150, 'early_stopping_patience': 50, 'early_stopping_epsilon': 0.001}, 'scheduler': {'initial_lr': 0.005, 'lr_scheduler': {'name': 'CosineAnnealingLR', 'base_lr': 1e-05, 'max_lr': 0.01}}, 'balance_samples': {'applied': False, 'type': 'gt'}, 'mixup_alpha': None, 'transfer_learning': {'retrain_model': None, 'retrain_fraction': 1.0, 'reset': True}}
+default_model: {'name': 'Unet', 'dropout_rate': 0.2, 'bn_momentum': 0.1, 'depth': 4, 'is_2d': True, 'final_activation': 'sigmoid', 'length_2D': [512, 512], 'stride_2D': [500, 500]}
+uncertainty: {'epistemic': False, 'aleatoric': False, 'n_it': 0}
+postprocessing: {'binarize_maxpooling': {}}
+evaluation_parameters: {}
+transformation: {'Resample': {'wspace': 1e-05, 'hspace': 1e-05}, 'RandomAffine': {'degrees': 2.5, 'scale': [0.05, 0.05], 'translate': [0.015, 0.015], 'applied_to': ['im', 'gt'], 'dataset_type': ['training']}, 'ElasticTransform': {'alpha_range': [100.0, 150.0], 'sigma_range': [4.0, 5.0], 'p': 0.5, 'applied_to': ['im', 'gt'], 'dataset_type': ['training']}, 'NormalizeInstance': {'applied_to': ['im']}}
