@@ -72,18 +72,18 @@ def main(args):
             cv2.imwrite(str(out_folder / 'labelsTr' / fname), label)
             
             # log and increment case_id
-            case_id_dict[str(case_id)] = img_fname
+            case_id_dict[str(case_id)] = str(img_fname)
             case_id += 1
 
     # put test subject images in imagesTs
-    test_case_id = max(case_id_dict.keys()) + 1
+    test_case_id = case_id
     for img_fname in (datapath / test_subj / 'micr').glob('*.png'):
         img = cv2.imread(str(img_fname))
         fname = f'VCU_{test_case_id:03d}_0000.png'
         cv2.imwrite(str(out_folder / 'imagesTs' / fname), img)
         
         # add the test subject to case_id_dict
-        case_id_dict[test_case_id] = img_fname
+        case_id_dict[test_case_id] = str(img_fname)
         test_case_id += 1
     
     with open('subject_to_case_identifier.json', 'w') as f:
