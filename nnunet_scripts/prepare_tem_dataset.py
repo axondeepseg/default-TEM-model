@@ -43,41 +43,48 @@ def main(args):
         f.write(json.dumps(dataset_info, indent=1))
 
     # save correspondence between original fnames and case IDs
-    case_id_dict = {sub:i for i,sub in enumerate(subject_list)}
+    case_id_dict = {}
+    case_id = 1
+    test_subj = 'sub-nyuMouse26'
 
     # put images in imagesTr
-    # (convert TIFFs to PNGs! file endings must match)
     for subject in subject_list:
-        case_id = case_id_dict[subject]
-        # (assuming there is only 1 valid image per subject folder)
-        img_fname = next((datapath / subject / 'micr').glob('*.tif'))
-        img = cv2.imread(str(img_fname))
-        fname = f'VCU_{case_id:03d}_0000.png'
-        cv2.imwrite(str(out_folder / 'imagesTr' / fname), img)
-        
-        # put labels in labelsTr
-        ax_path = next((datapath / 'derivatives' / 'labels' / subject / 'micr').glob('*seg-axon-manual*'))
-        my_path = next((datapath / 'derivatives' / 'labels' / subject / 'micr').glob('*seg-myelin-manual*'))
-        ax = cv2.imread(str(ax_path)) // 255
-        my = cv2.imread(str(my_path)) // 255
-        label = my + 2 * ax
-        fname = f'VCU_{case_id:03d}.png'
-        #NOTE: might need to only take one channel for the GT?
-        cv2.imwrite(str(out_folder / 'labelsTr' / fname), label)
 
-    # put unannotated images in imagesTs for testing
-    # (convert TIFFs to PNGs! file endings must match)
-    unnanotated_subjects = list((datapath / 'derivatives' / 'ads-derivatives').glob('sub*'))
-    unnanotated_subjects = [d.name for d in unnanotated_subjects]
-    test_case_id = max(case_id_dict.values())
-    for subject in unnanotated_subjects:
-        test_case_id += 1
-        img_fname = next((datapath / subject / 'micr').glob('*.tif'))
+        if subject == test_subj:
+            # skip test subject
+            continue
+
+        subj_files = (datapath / subject / 'micr').glob('*.png')
+        for img_fname in subj_files:
+            img = cv2.imread(str(img_fname))
+            fname = f'VCU_{case_id:03d}_0000.png'
+            cv2.imwrite(str(out_folder / 'imagesTr' / fname), img)
+        
+            # put labels in labelsTr
+            basename = f'{img_fname.stem}_seg-'
+            ax_path = datapath / 'derivatives' / 'labels' / subject / 'micr' / f'{basename}axon-manual.png'
+            my_path = datapath / 'derivatives' / 'labels' / subject / 'micr' / f'{basename}myelin-manual.png'
+            ax = cv2.imread(str(ax_path)) // 255
+            my = cv2.imread(str(my_path)) // 255
+            label = my + 2 * ax
+            fname = f'VCU_{case_id:03d}.png'
+            #NOTE: might need to only take one channel for the GT?
+            cv2.imwrite(str(out_folder / 'labelsTr' / fname), label)
+            
+            # log and increment case_id
+            case_id_dict[str(case_id)] = img_fname
+            case_id += 1
+
+    # put test subject images in imagesTs
+    test_case_id = max(case_id_dict.keys()) + 1
+    for img_fname in (datapath / test_subj / 'micr').glob('*.png'):
         img = cv2.imread(str(img_fname))
         fname = f'VCU_{test_case_id:03d}_0000.png'
         cv2.imwrite(str(out_folder / 'imagesTs' / fname), img)
+        
         # add the test subject to case_id_dict
-        case_id_dict[subject] = test_case_id
+        case_id_dict[test_case_id] = img_fname
+        test_case_id += 1
     
     with open('subject_to_case_identifier.json', 'w') as f:
         f.write(json.dumps(case_id_dict, indent=2))
